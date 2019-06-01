@@ -222,7 +222,7 @@ class Nse:
 
         self.get_symbol_list()
 
-        number_of_threads = 5
+        number_of_threads = 10
 
         chunk_list = list(self.chunk_list(self.symbol_list, number_of_threads))
 
@@ -239,7 +239,7 @@ class Nse:
             self.quote_list = self.quote_list + q_list
 
         end = datetime.now()
-        print("Ex time: {}".format(end - start))
+        print("Execution time: {}".format(end - start))
 
 
 
