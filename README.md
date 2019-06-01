@@ -29,17 +29,6 @@ Install dependencies. Requires python3 and pip
     pip install requirements.txt
 ```
 
-# TODO
-```
-- Fetch sectoral and industry data for stocks
-- Cleanup payload for each function
-- Add documentation
-- Create pip installable library
-- Improve Error handeling
-- Test Cases
-...
-```
-
 # Usage
 Example: Get all stock quotes (all or only for specified list)
 
@@ -69,4 +58,15 @@ Get list of all NIFTY  gainers
     nse.get_nifty_gainers()
 
     print(nse.nifty_gainers)
+```
+
+# TODO
+```
+- Fetch sectoral and industry data for stocks
+- Cleanup payload for each function
+- Add documentation
+- Create pip installable library
+- Improve Error handeling
+- Test Cases
+...
 ```
