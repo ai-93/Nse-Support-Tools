@@ -7,7 +7,7 @@ Version: 0.1
 List of supported features
 ```
 - Get single stock quote
-- Get all stock quote for all symbols or for only specified symbols
+- Get stock quote for all symbols or for only specified symbols
 - Get equity instrument list
 - Get nifty gainers
 - Get nifty losers
