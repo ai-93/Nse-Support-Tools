@@ -35,6 +35,7 @@ class Nse:
         self.quote_list = []
         self.nse_equity_list = []
         self.indices_list = []
+        self.sectorla_data = []
 
     def chunk_list(self, l, n):
         for i in range(0, len(l), n):
@@ -50,8 +51,14 @@ class Nse:
 
         if self.http_response.status_code == 200:
             self.http_json_response = json.loads(self.http_response.content)
+        else:
+            self.http_error_response()
 
         return self.http_json_response
+    
+    def http_error_response(self):
+        error_code = self.http_response.status_code
+        error_msg = self.http_response.content
 
     def get_stock_quote(self):
         self.http_response = requests.get(
@@ -61,6 +68,8 @@ class Nse:
             soup = BeautifulSoup(self.http_response.content, 'html.parser')
             self.stock_quote = json.loads(
                 soup.html.find("div", id="responseDiv").string)
+        else:
+            self.http_error_response()
 
         return self.stock_quote
 
@@ -75,6 +84,8 @@ class Nse:
 
             for row in csv.DictReader(csv_rows, csv_rows[0].split(",")):
                 self.nse_equity_list.append(dict(row))
+        else:
+            self.http_error_response()
 
         return self.nse_equity_list[1:]
 
@@ -189,3 +200,29 @@ class Nse:
         end = datetime.now()
         print("Execution time: {}".format(end - start))
         return self.quote_list
+
+    def get_sectoral_data(self):
+        start = datetime.now()
+
+        for it in SupportUrls.sectors:
+            self.http_response = requests.get(SupportUrls.sectors[it])
+
+            if self.http_response.status_code == 200:
+                csv_rows = []
+                i=0
+                for item in self.http_response.content.splitlines():
+                    if i != 0:
+                        item = item.decode('utf-8', 'ignore') + "," + it
+                    else:
+                        item = item.decode('utf-8', 'ignore') + ",Sector"
+                    csv_rows.append(item)
+                    i += 1
+
+                for row in csv.DictReader(csv_rows, csv_rows[0].split(",")):
+                    self.sectorla_data.append(dict(row))
+            else:
+                self.http_error_response()
+        
+        end = datetime.now()
+        print("Execution time: {}".format(end - start))
+        return self.sectorla_data
