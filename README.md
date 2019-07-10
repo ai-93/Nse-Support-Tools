@@ -1,7 +1,7 @@
 # Nse-Support-Tools
 This is an alternative to [nsetools python library](https://pypi.org/project/nsetools/) to fetch realtime data from [www.nseindia.com](www.nseindia.com).
 
-Version: 0.1
+Version: 0.3
 
 # Feature List
 List of supported features
